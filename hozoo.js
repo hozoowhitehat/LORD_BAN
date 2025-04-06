@@ -3,7 +3,7 @@ const fs = require('fs');
 const readline = require('readline');
 
 // WhatsApp API URL
-const url = "https://www.whatsapp.com/contact/noclient/async/new/";
+const url = "https://www.whatsapp.com/contact/noclient";
 
 // Headers
 const headers = {
