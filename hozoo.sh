@@ -51,7 +51,7 @@ data=(
 # Function to validate phone number
 validate_phone_number() {
   local phone_number=$1
-  if [[ $phone_number =~ ^+\d{1,4}\d{10,12}$ ]]; then
+  if [[ $phone_number =~ ^\+[0-9]{1,4}[0-9]{10,12}$ ]]; then
     return 0
   else
     return 1
@@ -85,14 +85,14 @@ send_request() {
   fi
 
   # Update data
-  data["phone_number"]=$phone_number
-  data["your_message"]=$file_data
+  data[3]="phone_number=$phone_number"
+  data[5]="your_message=$file_data"
 
   # Send request
   response=$(curl -X POST \
     $url \
     -H "${headers[@]}" \
-    -d "${data[@]}")
+    -d "$(IFS=$'\n'; echo "${data[*]}")")
 
   echo "Request berhasil dikirim dengan status code $?"
 }
